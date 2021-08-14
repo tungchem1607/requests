@@ -696,6 +696,8 @@ class MyRequests implements ProjectInterface, SendRequestsInterface
                 $this->http_code    = $status_code;
                 $this->http_message = $request->getReasonPhrase();
                 $this->error_code   = $error_code;
+                $this->logger->debug(__FUNCTION__, 'http_error: ', $http_error);
+                $this->logger->debug(__FUNCTION__, 'http_error aaa: ', floor($this->http_code / 100));
                 $this->logger->debug(__FUNCTION__, 'Full Data Curl Message and Http Message: ', $error_code);
                 if ($http_error) {
                     if ($this->errorResponseIsData === TRUE) {
@@ -840,7 +842,7 @@ class MyRequests implements ProjectInterface, SendRequestsInterface
                 $this->requests_header = isset($curl->requestHeaders) ? $curl->requestHeaders : (isset($curl->request_headers) ? $curl->request_headers : NULL);
                 $this->response_header = isset($curl->responseHeaders) ? $curl->responseHeaders : (isset($curl->response_headers) ? $curl->response_headers : NULL);
                 // Response
-                if (isset($curl->error)) {
+                if (isset($curl->error) && $curl->error != false) {
                     // Debug
                     $this->logger->debug(__FUNCTION__, 'Full Data Curl Message and Http Message: ', $error_code);
                     if ($this->errorResponseIsData === TRUE) {
