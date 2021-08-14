@@ -696,8 +696,6 @@ class MyRequests implements ProjectInterface, SendRequestsInterface
                 $this->http_code    = $status_code;
                 $this->http_message = $request->getReasonPhrase();
                 $this->error_code   = $error_code;
-                $this->logger->debug(__FUNCTION__, 'http_error: ', $http_error);
-                $this->logger->debug(__FUNCTION__, 'http_error aaa: ', floor($this->http_code / 100));
                 $this->logger->debug(__FUNCTION__, 'Full Data Curl Message and Http Message: ', $error_code);
                 if ($http_error) {
                     if ($this->errorResponseIsData === TRUE) {
